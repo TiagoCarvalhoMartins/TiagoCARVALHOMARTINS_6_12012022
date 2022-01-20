@@ -1,7 +1,10 @@
     async function getPhotographers() {
         // Penser à remplacer par les données récupérées dans le json
-        const photographers = require('../../data/photographers.json');
-        console.log(photographers);
+        fetch("../../photographers.json")
+        .then(response => response.json())
+        .then(data => {
+        // data contient ton objet
+    })
         // et bien retourner le tableau photographers seulement une fois
         return ({
             photographers: [...photographers, ...photographers, ...photographers]})
