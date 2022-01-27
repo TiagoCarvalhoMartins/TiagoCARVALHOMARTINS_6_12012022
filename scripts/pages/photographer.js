@@ -1,32 +1,55 @@
-async function getPhotographers() {
+async function getMedias() {
     // Penser à remplacer par les données récupérées dans le json
-    photographer {
-        "name": "Mimi Keel",
-        "id": 243,
-        "city": "London",
-        "country": "UK",
-        "tagline": "Voir le beau dans le quotidien",
-        "price": 400,
-        "portrait": "MimiKeel.jpg"
-    },
-    // et bien retourner le tableau photographers seulement une fois
-    return ({photographer})
+    const media = [
+        {
+			"image": "Fashion_Yellow_Beach.jpg",
+		},
+		{
+			"image": "Fashion_Urban_Jungle.jpg",
+		},
+		{
+			"image": "Fashion_Pattern_on_Pattern.jpg",
+		},
+		{
+			"image": "Event_WeddingGazebo.jpg",
+		},
+		{
+			"image": "Event_Sparklers.jpg",
+		},
+		{
+			"image": "Event_18thAnniversary.jpg",
+		},
+		{
+			"video": "Art_Wooden_Horse_Sculpture.mp4",
+		},
+		{
+			"image": "Art_Triangle_Man.jpg",
+		},
+		{
+			"image": "Art_Purple_light.jpg",
+		},
+		{
+			"image": "Art_Mine.jpg",
+		}
+    ]
+    
+    return ({media})
 }
 
-async function displayData(photographers) {
-    const photographerHeader = document.querySelector(".photographer-header");
+async function displayMedia(medias) {
+    const photographerMedia = document.querySelector(".media");
 
-    photographers.forEach((photographer) => {
-        const photographerModel = headerFactory(photographer);
-        const headerCardDOM = photographerModel.getHeaderCardDOM();
-        photographerHeader.appendChild(headerCardDOM);
+    medias.forEach((media) => {
+        const mediaModel = mediaFactory(media);
+        const mediaCardDOM = mediaModel.getMediaCardDOM();
+        photographerMedia.appendChild(mediaCardDOM);
     });
 };
 
 async function init() {
     // Récupère les datas des photographes
-    const { photographers } = await getPhotographers();
-    displayData(photographers);
+    const  {medias}  = await getMedias();
+    displayMedia(medias);
 };
 
 init();

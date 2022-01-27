@@ -1,5 +1,5 @@
 function photographerFactory(data) {
-    const { name, portrait } = data;
+    const { name, portrait, city, country, tagline } = data;
 
     const picture = `assets/photographers/photographersID/${portrait}`;
 
@@ -13,5 +13,5 @@ function photographerFactory(data) {
         article.appendChild(h2);
         return (article);
     }
-    return { name, picture, getUserCardDOM }
+    return { name, picture, city, country, tagline, getUserCardDOM }
 }
