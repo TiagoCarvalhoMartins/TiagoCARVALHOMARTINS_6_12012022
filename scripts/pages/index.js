@@ -1,6 +1,6 @@
     async function getPhotographers() {
         // Penser à remplacer par les données récupérées dans le json
-        let response = await fetch("../../data/photographers.json")
+        let response = await fetch("https://tiagocarvalhomartins.github.io/TiagoCARVALHOMARTINS_6_12012022/data/photographers.json ")
         let myJSON = await response.json();
            
         
