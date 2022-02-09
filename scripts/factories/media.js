@@ -1,7 +1,7 @@
 function mediaFactory(data) {
-    const { image, title, likes } = data;
+    const { image, title, likes, photographerId } = data;
 
-    const picture = `assets/photographers/Tracy/${image}`;
+    const picture = `assets/photographers/${photographerId}/${image}`;
 
     function getMediaCardDOM() {
         const article = document.createElement( 'article' );

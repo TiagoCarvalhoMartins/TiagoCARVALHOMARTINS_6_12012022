@@ -6,12 +6,13 @@ function headerFactory(data) {
     function getHeaderCardDOM() {
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
+        img.setAttribute("src", picture);
         const h1 = document.createElement( 'h1' );
         h1.textContent = name;
-        const p = document.createElement ( 'p' )
-        p.textContent = city + country
-        p.textContent = tagline
+        const h2 = document.createElement ( 'h2' );
+        h2.textContent = city + ", " + country;
+        const p = document.createElement ( 'p' );
+        p.textContent = tagline;
         article.appendChild(img);
         article.appendChild(h1);
         article.appendChild(p);
