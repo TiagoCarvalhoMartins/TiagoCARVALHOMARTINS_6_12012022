@@ -13,6 +13,52 @@ header {
 	height: 90px;
 }
 
+.header {
+	display: flex;
+	justify-content: space-around;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.header .photograph-description {
+	order: 1;
+}
+
+.header .photograph-description h1 {
+	color: #d3573c;
+	font-size: 40px;
+	margin: 10px;
+}
+
+.header .photograph-description h2 {
+	color: #901c1c;
+	margin: 10px;
+}
+
+.header .photograph-description p {
+	color: #bababa;
+	margin: 10px;
+}
+
+.header button {
+	order: 2;
+	margin: 50px;
+}
+
+.header img {
+	order: 3;
+	margin-left: 50px;
+	margin-right: 30px;
+}
+
+.photograph-header img {
+	object-fit: cover;
+	border-radius: 200px;
+	height: 200px;
+	width: 200px;
+	box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.78);
+}
+
 h1 {
 	color: #901c1c;
 	margin-right: 100px;
@@ -108,7 +154,7 @@ h1 {
 	display: none;
 	position: absolute;
 	left: 181px;
-	bottom: 357px;
+	bottom: 395px;
 	background-color: #901c1c;
 	color: white;
 	width: 125px;
@@ -117,9 +163,11 @@ h1 {
 	font-size: 15px;
 }
 
-li {
+.hidden button {
 	padding: 10px;
 	border-bottom: 1px solid white;
+	border-radius: 0px;
+	width: 125px;
 }
 
 .fa-chevron-up {

@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" onclick="window.location.href='index.html'"/>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -19,11 +19,11 @@
       <div class="wrapper">
         <p class="sortby">Trier par</p>
         <button class="sort-btn" onclick="showWrapper()">Popularité <span class="fas fa-chevron-down"></span></button>
-        <ul class="hidden">
-          <li class="popularity">Popularité<span class="fas fa-chevron-up"></span></a>
-          <li class="date">Date</a>
-          <li class="title">Titre</a>
-        </ul>
+        <div class="hidden">
+          <button class="popularity" onclick="sortPopularity()">Popularité<span class="fas fa-chevron-up"></span></a>
+          <button class="date" onclick="sortDate()">Date</a>
+          <button class="title" onclick="sortTitle()">Titre</a>
+        </div>
       </div>
       <div class="media">
       </div>
