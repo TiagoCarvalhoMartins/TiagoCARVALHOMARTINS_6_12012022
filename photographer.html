@@ -20,12 +20,14 @@
         <p class="sortby">Trier par</p>
         <button class="sort-btn" onclick="showWrapper()">Popularité <span class="fas fa-chevron-down"></span></button>
         <div class="hidden">
-          <button class="popularity" onclick="sortPopularity()">Popularité<span class="fas fa-chevron-up"></span></a>
-          <button class="date" onclick="sortDate()">Date</a>
-          <button class="title" onclick="sortTitle()">Titre</a>
+          <button id="popularity">Popularité<span class="fas fa-chevron-up"></span></a>
+          <button id="date">Date</a>
+          <button id="title">Titre</a>
         </div>
       </div>
       <div class="media">
+      </div>
+      <div class="articleMedia">
       </div>
     </main>
     <div id="contact_modal">
@@ -44,6 +46,7 @@
 			</div>
 		</div>
     <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/factories/lightbox.js"></script>
     <script src="/scripts/factories/photographer_header.js"></script>
     <script src="/scripts/factories/media.js"></script>
     <script src="/scripts/pages/photographer.js"></script>

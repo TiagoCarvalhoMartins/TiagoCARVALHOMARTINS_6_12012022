@@ -46,12 +46,21 @@ async function displayMedia(medias) {
     });
 };
 
+let listenerModal = document.getElementById("articleMedia");
+listenerModal.addEventListener('click', function displayImgModal() {
+    const imgModal = document.querySelector(".articleMedia");
+    const imgModel = modalFactory();
+    const imgNav = imgModel.getLightboxModal();
+    imgModal.appendChild(imgNav);
+});
+
 async function init() {
     // Récupère les datas des photographes
     const  { medias }  = await getMedias();
     const { photographers } = await getPhotographers();
     displayMedia(medias);
     displayHeader(photographers);
+    displayImgModal();
 };
 
 function showWrapper() {
@@ -63,26 +72,34 @@ function showWrapper() {
 };
 
 let mediaSort = []
+let sortByDate = document.getElementById("date");
+let sortByPopularity = document.getElementById("popularity");
+let sortByTitle = document.getElementById("title");
+let hiddenSort = document.getElementsByClassName('hidden')[0];
 
-function sortDate(medias) {
-    const  { medias }  = await getMedias();
+sortByDate.addEventListener('click', function (medias) {
     mediaSort = medias.sort((a, b) => { 
         return new Date(a.date).valueOf() - new Date(b.date).valueOf();
     })
-    document.getElementsByClassName('hidden')[0].style.display = "none";
-}
+    hiddenSort.style.display = "none";
+});
 
-function sortTitle(medias) {
+sortByTitle.addEventListener('click', function (medias) {
     mediaSort = medias.sort((a, b) => { 
-        return new Date(a.title).valueOf() - new Date(b.title).valueOf();
-    })
-    document.getElementsByClassName('hidden')[0].style.display = "none";
-}
+        if (a.name.toLowerCase() < b.name.toLowerCase()) {
+            return -1;
+        } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return 1;
+        }
+        hiddenSort.style.display = "none";
+    });
+});
 
-function sortPopularity(medias) {
-    mediaSort = medias.sort((a, b) => { // SORT BY POPULARITY  
+sortByPopularity.addEventListener('click', function (medias) {
+    mediaSort = medias.sort((a, b) => {  
         return b.likes - a.likes
     })
-    document.getElementsByClassName('hidden')[0].style.display = "none";
-}
+    hiddenSort.style.display = "none";
+});
+
 init();
