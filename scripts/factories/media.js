@@ -1,5 +1,5 @@
 function mediaFactory(data) {
-    const { image, title, likes, photographerId } = data;
+    const { image, title, likes, photographerId, id } = data;
 
     const picture = `assets/photographers/${photographerId}/${image}`;
 
@@ -11,6 +11,7 @@ function mediaFactory(data) {
         const div = document.createElement( 'div' );
         article.setAttribute("id", "articleMedia");
         img.setAttribute("src", picture);
+        article.setAttribute("data-id", id);
         div.setAttribute("class", "description");
         h2.textContent = title;
         p.textContent = likes;

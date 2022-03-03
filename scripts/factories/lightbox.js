@@ -7,22 +7,25 @@ function modalFactory(data) {
     function getLightboxModal() {
         const div = document.createElement( 'div' );
         const divNav = document.createElement( 'div' );
+        const divNavClose = document.createElement( 'div' );
         const img = document.createElement( 'img' );
         const span1 = document.createElement( 'span' );
         const span2 = document.createElement( 'span' );
-        const button = document.createElement( 'button' );
+        const span3 = document.createElement( 'span' );
         const h2 = document.createElement( 'h2' );
         div.setAttribute("class", "lightboxModal");
+        divNavClose.setAttribute("class", "nav-close")
         divNav.setAttribute("class", "imageNavigation");
         img.setAttribute("src", picture);
         span1.setAttribute("class", "fas fa-chevron-left");
         span2.setAttribute("class", "fas fa-chevron-right");
-        button.setAttribute("class", "fa-solid fa-xmark");
+        span3.setAttribute("class", "fa-solid fa-xmark");
         h2.textContent = title;
 
-        div.appendChild(button);
-        div.appendChild(divNav);
+        div.appendChild(divNavClose);
         div.appendChild(h2);
+        divNavClose.appendChild(divNav)
+        divNavClose.appendChild(span3);
         divNav.appendChild(span1);
         divNav.appendChild(img);
         divNav.appendChild(span2);
