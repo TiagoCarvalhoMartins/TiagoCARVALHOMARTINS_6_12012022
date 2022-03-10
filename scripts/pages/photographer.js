@@ -36,6 +36,7 @@ async function displayHeader(photographers) {
 
 async function displayMedia(medias) {
     const photographerMedia = document.querySelector(".media");
+    photographerMedia.innerHTML = "";
 
     medias.forEach((media) => {
         if (getID() == media.photographerId) {
@@ -48,23 +49,62 @@ async function displayMedia(medias) {
 
 //lightbox 
 
+const imgModel = modalFactory()
+
+function createLightbox () {
+
+    const imgModal = document.querySelector(".articleMedia");
+    const imgNav = imgModel.getLightboxModal();
+    imgModal.appendChild(imgNav);
+    
+}
+
 function addListener (medias) {
     let listenerModal = document.getElementById("articleMedia");
     listenerModal.addEventListener('click', function displayImgModal(event) {
         let currentImgTarget = event.currentTarget;
         let mediaID = currentImgTarget.dataset.id
         const media = medias.find (media => media.id == mediaID )
-        const imgModal = document.querySelector(".articleMedia");
-        const imgModel = modalFactory(media);
-        const imgNav = imgModel.getLightboxModal();
-        imgModal.appendChild(imgNav);
+        imgModel.updateLightboxModal(media);
         document.getElementsByClassName('lightboxModal')[0].style.display = "flex";
     });
-    const closeBtn = document.getElementsByClassName("fa-xmark")[0];
-    closeBtn.forEach((cross) =>cross.addEventListener("click", closeLightbox));
+    const closeBtn = document.querySelectorAll("fa-xmark");
+    closeBtn.forEach((cross) =>cross.addEventListener('click', closeLightbox));
     function closeLightbox() {
-        document.getElementsByClassName('lightboxModal')[0] = "none";
-    }
+        document.getElementsByClassName('lightboxModal')[0].style.display = "none";
+    };
+
+    let previous = document.getElementsByClassName('fa-chevron-left')[0];
+    let next = document.getElementsByClassName('fa-chevron-right')[0];
+    let lightBoxMedia = document.getElementsByClassName("currentPicture")[0];
+    let lightBoxName = document.getElementsByClassName("currentTitle")[0];
+
+    previous.addEventListener('click', function () {
+        mediaSort.currentIndex -= -1;
+
+        if (mediaSort.currentIndex < 0) {
+            mediaSort.currentIndex = id.length - 1;
+            mediaSort.currentIndex = title.length - 1;
+        }
+        let src = id[mediaSort.currentIndex];
+        let titleSrc = title[mediaSort.currentIndex];
+
+        lightBoxMedia.innerHTML = `${src}`;
+        lightBoxName.innerHTML = `${titleSrc}`;
+    })  
+    next.addEventListener('click', function () {
+        mediaSort.currentIndex -= +1;
+    
+        if (mediaSort.currentIndex < 0) {
+            mediaSort.currentIndex = id.length - 1;
+            mediaSort.currentIndex = title.length - 1;
+        }
+        let src = id[mediaSort.currentIndex];
+        let titleSrc = title[mediaSort.currentIndex];
+    
+        lightBoxMedia.innerHTML = `${src}`;
+        lightBoxName.innerHTML = `${titleSrc}`;
+    })
 };
 
 
@@ -81,13 +121,19 @@ async function init() {
     const { photographers } = await getPhotographers();
     displayMedia(medias);
     displayHeader(photographers);
+    createLightbox(medias);
     addListener(medias);
 
+    btnSort= document.getElementsByClassName('sort-btn')[0];
+    const span = document.createElement( 'span' );
+    span.setAttribute("class", "fas fa-chevron-down");
     sortByDate.addEventListener('click', function () {
         mediaSort = medias.sort((a, b) => { 
             return new Date(a.date).valueOf() - new Date(b.date).valueOf();
         })
         hiddenSort.style.display = "none";
+        btnSort.textContent = "Date";
+        btnSort.appendChild(span);
         displayMedia (mediaSort);
     });
 
@@ -100,6 +146,8 @@ async function init() {
             }
         });
         hiddenSort.style.display = "none";
+        btnSort.textContent = "Titre";
+        btnSort.appendChild(span);
         displayMedia (mediaSort);
     });
 
@@ -108,9 +156,12 @@ async function init() {
             return b.likes - a.likes
         })
         hiddenSort.style.display = "none";
+        btnSort.textContent = "Popularité";
+        btnSort.appendChild(span);
         displayMedia (mediaSort);
     });
 };
+ 
 
 function showWrapper() {
     if (document.getElementsByClassName('hidden')[0].style.display = "none") {
@@ -119,7 +170,6 @@ function showWrapper() {
         document.getElementsByClassName('hidden')[0].style.display = "none"
     }   
 };
-
 
 
 

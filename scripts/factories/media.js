@@ -21,5 +21,7 @@ function mediaFactory(data) {
         div.appendChild(p);
         return (article);
     }
+
     return { picture, getMediaCardDOM }
+
 }
