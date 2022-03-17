@@ -1,8 +1,5 @@
-let article = document.getElementById("articleMedia")
 
 function modalFactory() {
-    //const { image, photographerId, title } = data;
-    //const picture = `assets/photographers/${photographerId}/${image}`;
     const img = document.createElement( 'img' );
     const h2 = document.createElement( 'h2' );
 

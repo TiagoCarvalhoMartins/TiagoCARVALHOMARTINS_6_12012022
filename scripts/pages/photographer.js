@@ -47,28 +47,41 @@ async function displayMedia(medias) {
     });
 };
 
+function addIndex(medias) {
+    const { id } = medias;
+    const mediasIndex = medias.indexOf(id)
+    let articleMedia = document.getElementsByClassName("articleMedia");
+
+    articleMedia.forEach ((article) => {
+        article.setAttribute("data-index", mediasIndex);
+    });
+}
+
 //lightbox 
 
 const imgModel = modalFactory()
 
 function createLightbox () {
 
-    const imgModal = document.querySelector(".articleMedia");
+    const imgModal = document.getElementById("main");
     const imgNav = imgModel.getLightboxModal();
     imgModal.appendChild(imgNav);
     
 }
 
 function addListener (medias) {
-    let listenerModal = document.getElementById("articleMedia");
-    listenerModal.addEventListener('click', function displayImgModal(event) {
-        let currentImgTarget = event.currentTarget;
-        let mediaID = currentImgTarget.dataset.id
-        const media = medias.find (media => media.id == mediaID )
-        imgModel.updateLightboxModal(media);
-        document.getElementsByClassName('lightboxModal')[0].style.display = "flex";
+    let listenerModal = document.querySelectorAll(".articleMedia");
+    listenerModal.forEach (function (articleMedia) {
+        articleMedia.addEventListener('click', function displayImgModal(event) {
+            let currentImgTarget = event.currentTarget;
+            let mediaID = currentImgTarget.dataset.id;
+            const media = medias.find (media => media.id == mediaID )
+            imgModel.updateLightboxModal(media);
+            document.getElementsByClassName('lightboxModal')[0].style.display = "flex";
+        });
     });
-    const closeBtn = document.querySelectorAll("fa-xmark");
+
+    const closeBtn = document.querySelectorAll(".fa-xmark");
     closeBtn.forEach((cross) =>cross.addEventListener('click', closeLightbox));
     function closeLightbox() {
         document.getElementsByClassName('lightboxModal')[0].style.display = "none";
@@ -80,20 +93,19 @@ function addListener (medias) {
     let lightBoxName = document.getElementsByClassName("currentTitle")[0];
 
     previous.addEventListener('click', function () {
-        mediaSort.currentIndex -= -1;
+        mediaSort.dataset.index -= -1;
 
-        if (mediaSort.currentIndex < 0) {
-            mediaSort.currentIndex = id.length - 1;
-            mediaSort.currentIndex = title.length - 1;
-        }
-        let src = id[mediaSort.currentIndex];
-        let titleSrc = title[mediaSort.currentIndex];
+        //if (mediaSort.currentIndex < 0) {
+        //    mediaSort.currentIndex = id.length - 1;
+        //    mediaSort.currentIndex = title.length - 1;
+        //}
+        const {photographerId, title, image} = mediaSort[mediaSort.currentIndex];
 
-        lightBoxMedia.innerHTML = `${src}`;
-        lightBoxName.innerHTML = `${titleSrc}`;
+        lightBoxMedia.setAttribute ("src", `assets/photographers/${photographerId}/${image}`);
+        lightBoxName.innerHTML = `${title}`;
     })  
     next.addEventListener('click', function () {
-        mediaSort.currentIndex -= +1;
+        mediaSort.dataset.index -= +1;
     
         if (mediaSort.currentIndex < 0) {
             mediaSort.currentIndex = id.length - 1;
@@ -106,7 +118,6 @@ function addListener (medias) {
         lightBoxName.innerHTML = `${titleSrc}`;
     })
 };
-
 
 
 let mediaSort = []
@@ -135,6 +146,8 @@ async function init() {
         btnSort.textContent = "Date";
         btnSort.appendChild(span);
         displayMedia (mediaSort);
+        addIndex(mediaSort);
+        addListener(medias);
     });
 
     sortByTitle.addEventListener('click', function () {
@@ -149,6 +162,8 @@ async function init() {
         btnSort.textContent = "Titre";
         btnSort.appendChild(span);
         displayMedia (mediaSort);
+        addIndex(mediaSort);
+        addListener(medias);
     });
 
     sortByPopularity.addEventListener('click', function () {
@@ -159,6 +174,8 @@ async function init() {
         btnSort.textContent = "Popularité";
         btnSort.appendChild(span);
         displayMedia (mediaSort);
+        addIndex(mediaSort);
+        addListener(medias);
     });
 };
  
