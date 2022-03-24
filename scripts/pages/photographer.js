@@ -5,7 +5,8 @@ async function getMedias() {
 	   
 	
 	// et bien retourner le tableau photographers seulement une fois
-	return (myJSON)
+    const myJSONFiltered = myJSON.medias.filter (media => media.photographerId == getID() )
+	return (myJSONFiltered)
 }
 
 async function getPhotographers() {
@@ -34,39 +35,33 @@ async function displayHeader(photographers) {
     document.getElementsByClassName('header')[0].appendChild(  document.getElementsByClassName('contact_button')[0] )
 };
 
-async function displayMedia(medias) {
+
+function displayMedia(medias) {
     const photographerMedia = document.querySelector(".media");
     photographerMedia.innerHTML = "";
 
-    medias.forEach((media) => {
-        if (getID() == media.photographerId) {
-            const mediaModel = mediaFactory(media);
-            const mediaCardDOM = mediaModel.getMediaCardDOM();
-            photographerMedia.appendChild(mediaCardDOM);
-        }
+    medias.forEach((media, index) => {
+        const mediaModel = mediaFactory(media);
+        const mediaCardDOM = mediaModel.getMediaCardDOM(index);
+        photographerMedia.appendChild(mediaCardDOM);
     });
 };
 
-function addIndex(medias) {
-    const { id } = medias;
-    const mediasIndex = medias.indexOf(id)
-    let articleMedia = document.getElementsByClassName("articleMedia");
-
-    articleMedia.forEach ((article) => {
-        article.setAttribute("data-index", mediasIndex);
-    });
-}
 
 //lightbox 
 
 const imgModel = modalFactory()
+
+function showMedia () {
+    
+}
 
 function createLightbox () {
 
     const imgModal = document.getElementById("main");
     const imgNav = imgModel.getLightboxModal();
     imgModal.appendChild(imgNav);
-    
+    imgModel.addListener ();
 }
 
 function addListener (medias) {
@@ -75,50 +70,13 @@ function addListener (medias) {
         articleMedia.addEventListener('click', function displayImgModal(event) {
             let currentImgTarget = event.currentTarget;
             let mediaID = currentImgTarget.dataset.id;
+            let mediaIndex = currentImgTarget.dataset.index
             const media = medias.find (media => media.id == mediaID )
-            imgModel.updateLightboxModal(media);
+            imgModel.updateLightboxModal(media, mediaIndex);
             document.getElementsByClassName('lightboxModal')[0].style.display = "flex";
         });
     });
-
-    const closeBtn = document.querySelectorAll(".fa-xmark");
-    closeBtn.forEach((cross) =>cross.addEventListener('click', closeLightbox));
-    function closeLightbox() {
-        document.getElementsByClassName('lightboxModal')[0].style.display = "none";
-    };
-
-    let previous = document.getElementsByClassName('fa-chevron-left')[0];
-    let next = document.getElementsByClassName('fa-chevron-right')[0];
-    let lightBoxMedia = document.getElementsByClassName("currentPicture")[0];
-    let lightBoxName = document.getElementsByClassName("currentTitle")[0];
-
-    previous.addEventListener('click', function () {
-        mediaSort.dataset.index -= -1;
-
-        //if (mediaSort.currentIndex < 0) {
-        //    mediaSort.currentIndex = id.length - 1;
-        //    mediaSort.currentIndex = title.length - 1;
-        //}
-        const {photographerId, title, image} = mediaSort[mediaSort.currentIndex];
-
-        lightBoxMedia.setAttribute ("src", `assets/photographers/${photographerId}/${image}`);
-        lightBoxName.innerHTML = `${title}`;
-    })  
-    next.addEventListener('click', function () {
-        mediaSort.dataset.index -= +1;
-    
-        if (mediaSort.currentIndex < 0) {
-            mediaSort.currentIndex = id.length - 1;
-            mediaSort.currentIndex = title.length - 1;
-        }
-        let src = id[mediaSort.currentIndex];
-        let titleSrc = title[mediaSort.currentIndex];
-    
-        lightBoxMedia.innerHTML = `${src}`;
-        lightBoxName.innerHTML = `${titleSrc}`;
-    })
-};
-
+}
 
 let mediaSort = []
 let sortByDate = document.getElementById("date");
@@ -128,7 +86,8 @@ let hiddenSort = document.getElementsByClassName('hidden')[0];
 
 async function init() {
     // Récupère les datas des photographes
-    const  { medias }  = await getMedias();
+    const medias = await getMedias();
+    let mediaSort = medias
     const { photographers } = await getPhotographers();
     displayMedia(medias);
     displayHeader(photographers);

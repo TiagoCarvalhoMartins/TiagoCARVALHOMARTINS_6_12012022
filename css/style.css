@@ -211,7 +211,7 @@ h1 {
 	color: #901c1c;
 	font-size: 22px;
 	text-align: left;
-	margin: 10px 0;
+	margin: 0px 0;
 }
 
 .media article .description p {
@@ -219,7 +219,7 @@ h1 {
 	font-weight: bold;
 	font-size: 22px;
 	text-align: right;
-	margin: 10px 0;
+	margin: -0px 0;
 }
 
 .fa-stack {
@@ -291,6 +291,8 @@ h1 {
 }
 
 .imageNavigation .currentPicture {
+	object-fit: cover;
+	box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.78);
 	height: 100%;
 	width: 100%;
 	border-radius: 0px;

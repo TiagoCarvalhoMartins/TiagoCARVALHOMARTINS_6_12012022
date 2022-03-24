@@ -27,17 +27,59 @@ function modalFactory() {
         divNav.appendChild(img);
         divNav.appendChild(span2);
         return (div);
-        }
+    }
 
-        function updateLightboxModal (data) {
-            const { image, photographerId, title } = data;
-            const picture = `assets/photographers/${photographerId}/${image}`;
+    function updateLightboxModal (data, index) {
+        const { image, photographerId, title } = data;
+        const picture = `assets/photographers/${photographerId}/${image}`;
     
-            img.setAttribute("src", picture);
-            img.setAttribute("class", "currentPicture");
-            h2.textContent = title;
-            h2.setAttribute("class", "currentTitle");
-        }
+        img.setAttribute("src", picture);
+        img.setAttribute("data-index", index)
+        img.setAttribute("class", "currentPicture");
+        h2.textContent = title;
+        h2.setAttribute("class", "currentTitle");
+    }
 
-    return { getLightboxModal, updateLightboxModal }
+    function addListener () {
+        const closeBtn = document.querySelectorAll(".fa-xmark");
+        closeBtn.forEach((cross) =>cross.addEventListener('click', closeLightbox));
+        function closeLightbox() {
+            document.getElementsByClassName('lightboxModal')[0].style.display = "none";
+        };
+
+        let previous = document.getElementsByClassName('fa-chevron-left')[0];
+        let next = document.getElementsByClassName('fa-chevron-right')[0];
+        let lightBoxName = document.getElementsByClassName("currentTitle")[0];
+
+        previous.addEventListener('click', function () {
+            let mediaIndex = img.dataset.index
+            let newIndex = mediaIndex + 1
+            //if (mediaSort.currentIndex < 0) {
+            //    mediaSort.currentIndex = id.length - 1;
+            //    mediaSort.currentIndex = title.length - 1;
+            //}
+            const {photographerId, title, image} = mediaSort[newIndex];
+
+            img.setAttribute ("src", `assets/photographers/${photographerId}/${image}`);
+            //lightBoxName.innerHTML = `${title}`;
+        })  
+        next.addEventListener('click', function () {
+            mediaSort.dataset.index -= +1;
+        
+            if (mediaSort.currentIndex < 0) {
+                mediaSort.currentIndex = id.length - 1;
+                mediaSort.currentIndex = title.length - 1;
+            }
+            let src = id[mediaSort.currentIndex];
+            let titleSrc = title[mediaSort.currentIndex];
+        
+            lightBoxMedia.innerHTML = `${src}`;
+            lightBoxName.innerHTML = `${titleSrc}`;
+        })
+    }
+
+
+
+
+    return { getLightboxModal, updateLightboxModal, addListener }
 }
