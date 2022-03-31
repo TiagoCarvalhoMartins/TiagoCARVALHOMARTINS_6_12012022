@@ -6,6 +6,8 @@ function mediaFactory(data) {
 
 
     function getMediaCardDOM(index) {
+        
+        //create elements
         const article = document.createElement( 'article' );
         const img = document.createElement( 'img' );
         const vid = document.createElement( 'video' );
@@ -17,12 +19,10 @@ function mediaFactory(data) {
         const span = document.createElement( 'span' );
         const iFull = document.createElement( 'i' );
         const iEmpty = document.createElement( 'i' );
+
+        //configure elements
         article.setAttribute("class", "articleMedia");
-        vid.setAttribute("id", "video")
         span.setAttribute("class", "fa-stack");
-        img.setAttribute("src", picture);
-        img.setAttribute("class", "openModal");
-        src.setAttribute("src", videos);
         article.setAttribute("data-id", id);
         article.setAttribute("data-index", index);
         div.setAttribute("class", "description");
@@ -31,30 +31,27 @@ function mediaFactory(data) {
         h2.textContent = title;
         p.textContent = likes;
 
-        function showArticle() {
-            if (data.image !== undefined) {
-                article.appendChild(img);
-                article.appendChild(div);
-                div.appendChild(h2);
-                div.appendChild(p);
-                p.appendChild(span);
-                span.appendChild(iEmpty);
-                span.appendChild(iFull);
-                return (article);
-            } if (data.video !== undefined) {
-                article.appendChild(vid);
-                vid.appendChild(src);
-                article.appendChild(div);
-                div.appendChild(h2);
-                div.appendChild(p);
-                p.appendChild(span);
-                span.appendChild(iEmpty);
-                span.appendChild(iFull);
-                return (article);
-            }
+        //append elements
+        article.appendChild(div);
+        div.appendChild(h2);
+        div.appendChild(p);
+        p.appendChild(span);
+        span.appendChild(iEmpty);
+        span.appendChild(iFull);
+
+        //display image or video
+        if (data.image !== undefined) {
+            img.setAttribute("src", picture);
+            img.setAttribute("class", "openModal");
+            article.appendChild(img);    
+        } if (data.video !== undefined) {
+            vid.setAttribute("class", "video");
+            src.setAttribute("src", videos);
+            article.appendChild(vid);
+            vid.appendChild(src);          
         }
 
-        //return (article);
+        return (article);
     }
 
     function likeButton () {

@@ -1,24 +1,25 @@
 async function getMedias() {
-	// Penser à remplacer par les données récupérées dans le json
+	//Get JSON Medias
 	let response = await fetch("https://tiagocarvalhomartins.github.io/TiagoCARVALHOMARTINS_6_12012022/data/photographers.json ")
 	let myJSON = await response.json();
 	   
 	
-	// et bien retourner le tableau photographers seulement une fois
+	//return Array filtered with what is displayed
     const myJSONFiltered = myJSON.medias.filter (media => media.photographerId == getID() )
 	return (myJSONFiltered)
 }
 
 async function getPhotographers() {
-    // Penser à remplacer par les données récupérées dans le json
+    //Get JSON photographers
     let response = await fetch("https://tiagocarvalhomartins.github.io/TiagoCARVALHOMARTINS_6_12012022/data/photographers.json ")
     let myJSON = await response.json();
        
     
-    // et bien retourner le tableau photographers seulement une fois
+    //return Array
     return (myJSON)
 }
 
+//get the photographer ID on URL
 function getID() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -26,16 +27,16 @@ function getID() {
     return (idPhotographer)
 }
 
-async function displayHeader(photographers) {
+//display header created from factorie
+async function displayHeader(photographer) {
     const photographerHeader = document.querySelector(".photograph-header");
-    const photographe = photographers.find (photographer => photographer.id == getID() )
-    const headerModel = headerFactory(photographe);
+    const headerModel = headerFactory(photographer);
     const headerCardDOM = headerModel.getHeaderCardDOM();
     photographerHeader.appendChild(headerCardDOM);
-    document.getElementsByClassName('header')[0].appendChild(  document.getElementsByClassName('contact_button')[0] )
+    document.getElementsByClassName('header')[0].appendChild(document.getElementsByClassName('contact_button')[0] )
 };
 
-
+//clean medias and after create them
 function displayMedia(medias) {
     const photographerMedia = document.querySelector(".media");
     photographerMedia.innerHTML = "";
@@ -49,12 +50,7 @@ function displayMedia(medias) {
 
 
 //lightbox 
-
 const imgModel = modalFactory()
-
-function showMedia () {
-    
-}
 
 function createLightbox () {
 
@@ -64,39 +60,44 @@ function createLightbox () {
     imgModel.addListener ();
 }
 
-function addListener (medias) {
-    let listenerModal = document.querySelectorAll(".articleMedia");
-    listenerModal.forEach (function (articleMedia) {
-        articleMedia.addEventListener('click', function displayImgModal(event) {
-            let currentImgTarget = event.currentTarget;
-            let mediaID = currentImgTarget.dataset.id;
-            let mediaIndex = currentImgTarget.dataset.index
-            const media = medias.find (media => media.id == mediaID )
-            imgModel.updateLightboxModal(media, mediaIndex);
-            document.getElementsByClassName('lightboxModal')[0].style.display = "flex";
-        });
-    });
-}
-
 let mediaSort = []
 let sortByDate = document.getElementById("date");
 let sortByPopularity = document.getElementById("popularity");
 let sortByTitle = document.getElementById("title");
 let hiddenSort = document.getElementsByClassName('hidden')[0];
+btnSort= document.getElementsByClassName('sort-btn')[0];
+const span = document.createElement( 'span' );
+span.setAttribute("class", "fas fa-chevron-down");
+
+//async function date() {
+//    const medias = await getMedias();
+//    mediaSort = medias
+//    mediaSort = medias.sort((a, b) => { 
+//        return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+//    })
+//    hiddenSort.style.display = "none";
+//    btnSort.textContent = "Date";
+//    btnSort.appendChild(span);
+//    displayMedia (mediaSort);
+//    addIndex(mediaSort);
+//    addListener(medias);
+//}
 
 async function init() {
+
+    //find photographe
+    const { photographers } = await getPhotographers();
+    const photographer = photographers.find (photographer => photographer.id == getID() )
+
     // Récupère les datas des photographes
     const medias = await getMedias();
-    let mediaSort = medias
-    const { photographers } = await getPhotographers();
-    displayMedia(medias);
-    displayHeader(photographers);
-    createLightbox(medias);
-    addListener(medias);
+    mediaSort = medias
 
-    btnSort= document.getElementsByClassName('sort-btn')[0];
-    const span = document.createElement( 'span' );
-    span.setAttribute("class", "fas fa-chevron-down");
+    //display
+    displayMedia(medias);
+    displayHeader(photographer);
+    createLightbox();
+
     sortByDate.addEventListener('click', function () {
         mediaSort = medias.sort((a, b) => { 
             return new Date(a.date).valueOf() - new Date(b.date).valueOf();
@@ -139,7 +140,7 @@ async function init() {
 };
  
 
-function showWrapper() {
+function wrapper() {
     if (document.getElementsByClassName('hidden')[0].style.display = "none") {
         document.getElementsByClassName('hidden')[0].style.display = "block"
     } else {

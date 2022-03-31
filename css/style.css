@@ -199,12 +199,15 @@ h1 {
 }
 
 .media article {
+	display: flex;
+	flex-direction: column-reverse;
 	max-width: 300px;
 }
 
 .media article .description {
 	display: flex;
 	justify-content: space-between;
+	margin-top: 10px;
 }
 
 .media article .description h2 {
@@ -291,8 +294,14 @@ h1 {
 }
 
 .imageNavigation .currentPicture {
-	object-fit: cover;
-	box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.78);
+	object-fit: contain;
+	height: 100%;
+	width: 100%;
+	border-radius: 0px;
+}
+
+.imageNavigation .currentVideo {
+	object-fit: contain;
 	height: 100%;
 	width: 100%;
 	border-radius: 0px;
