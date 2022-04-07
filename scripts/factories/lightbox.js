@@ -12,15 +12,20 @@ function modalFactory() {
         const div = document.createElement( 'div' );
         const divNav = document.createElement( 'div' );
         const divNavClose = document.createElement( 'div' );
-        const span1 = document.createElement( 'span' );
-        const span2 = document.createElement( 'span' );
-        const span3 = document.createElement( 'span' );
+        const button1 = document.createElement( 'button' );
+        const button2 = document.createElement( 'button' );
+        const button3 = document.createElement( 'button' );
         div.setAttribute("class", "lightboxModal");
+        div.setAttribute("role", "dialog");
+        div.setAttribute("aria-describedby", "lightbox");
         divNavClose.setAttribute("class", "nav-close")
         divNav.setAttribute("class", "imageNavigation");
-        span1.setAttribute("class", "fas fa-chevron-left");
-        span2.setAttribute("class", "fas fa-chevron-right");
-        span3.setAttribute("class", "fa-solid fa-xmark");
+        button1.setAttribute("class", "fas fa-chevron-left");
+        button1.setAttribute("aria-label", "Précédent");
+        button2.setAttribute("class", "fas fa-chevron-right");
+        button2.setAttribute("aria-label", "Suivant");
+        button3.setAttribute("class", "fa-solid fa-xmark");
+        button3.setAttribute("aria-label", "Fermer");
         img.setAttribute("class", "currentPicture");
         vid.setAttribute("class", "currentVideo");
         vid.setAttribute("controls", "true")
@@ -28,11 +33,11 @@ function modalFactory() {
         div.appendChild(divNavClose);
         div.appendChild(h2);
         divNavClose.appendChild(divNav)
-        divNavClose.appendChild(span3);
-        divNav.appendChild(span1);
+        divNavClose.appendChild(button3);
+        divNav.appendChild(button1);
         divNav.appendChild(img);
         divNav.appendChild(vid);
-        divNav.appendChild(span2);
+        divNav.appendChild(button2);
         return (div);
     }
 
@@ -68,6 +73,10 @@ function modalFactory() {
     //show lightbox
     function _displayLightbox() {
         document.getElementsByClassName('lightboxModal')[0].style.display = "flex";
+        document.getElementsByClassName('photograph-header')[0].setAttribute("aria-hidden", "true")
+        document.getElementsByClassName('wrapper')[0].setAttribute("aria-hidden", "true")
+        document.getElementsByClassName('media')[0].setAttribute("aria-hidden", "true")
+        document.getElementsByClassName('articleMedia')[0].setAttribute("aria-hidden", "true")
     }
 
     //display image
@@ -79,6 +88,7 @@ function modalFactory() {
         //display image or video
         if (data.image !== undefined) {
             img.setAttribute("src", picture);
+            img.setAttribute("alt", title);
             img.setAttribute("data-index", index)
             h2.textContent = title;
             h2.setAttribute("class", "currentTitle");
@@ -87,6 +97,7 @@ function modalFactory() {
         } if (data.video !== undefined) {
             src.setAttribute("src", videos);
             vid.setAttribute("data-index", index)
+            vid.setAttribute("title", title)
             vid.appendChild(src);   
             h2.textContent = title;
             h2.setAttribute("class", "currentTitle");
@@ -120,6 +131,10 @@ function modalFactory() {
     //close the lightbox
     function _closeLightbox() {
         document.getElementsByClassName('lightboxModal')[0].style.display = "none";
+        document.getElementsByClassName('photograph-header')[0].setAttribute("aria-hidden", "false")
+        document.getElementsByClassName('wrapper')[0].setAttribute("aria-hidden", "false")
+        document.getElementsByClassName('media')[0].setAttribute("aria-hidden", "false")
+        document.getElementsByClassName('articleMedia')[0].setAttribute("aria-hidden", "false")
     };
 
     

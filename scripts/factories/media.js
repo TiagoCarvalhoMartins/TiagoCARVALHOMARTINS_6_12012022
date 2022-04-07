@@ -4,74 +4,84 @@ function mediaFactory(data) {
     const picture = `assets/photographers/${photographerId}/${image}`;
     const videos = `assets/photographers/${photographerId}/${video}`;
 
+    const iFull = document.createElement( 'i' );
+    const iEmpty = document.createElement( 'i' );
+    const p = document.createElement( 'p' );
 
     function getMediaCardDOM(index) {
         
         //create elements
         const article = document.createElement( 'article' );
+        const a = document.createElement( 'a' );
         const img = document.createElement( 'img' );
         const vid = document.createElement( 'video' );
         const src = document.createElement( 'source' );
         src.type = "video/mp4";
         const h2 = document.createElement( 'h2' );
-        const p = document.createElement( 'p' );
-        const div = document.createElement( 'div' );
-        const span = document.createElement( 'span' );
-        const iFull = document.createElement( 'i' );
-        const iEmpty = document.createElement( 'i' );
+        const div1 = document.createElement( 'div' );
+        const div2 = document.createElement( 'div' );
+        const button = document.createElement( 'button' );
 
         //configure elements
         article.setAttribute("class", "articleMedia");
-        span.setAttribute("class", "fa-stack");
+        a.setAttribute("class", "openLightbox");
+        a.setAttribute("href", "#");
+        a.setAttribute("lang","en")
+        button.setAttribute("class", "fa-stack");
+        button.setAttribute("aria-label", "liker");
         article.setAttribute("data-id", id);
         article.setAttribute("data-index", index);
-        div.setAttribute("class", "description");
+        div1.setAttribute("class", "description");
+        div2.setAttribute("class", "likes");
         iFull.setAttribute("class", "fa-solid fa-heart fa-stack-1x full");
         iEmpty.setAttribute("class", "fa-regular fa-heart fa-stack-1x empty");
         h2.textContent = title;
+        h2.setAttribute("lang","en")
         p.textContent = likes;
 
         //append elements
-        article.appendChild(div);
-        div.appendChild(h2);
-        div.appendChild(p);
-        p.appendChild(span);
-        span.appendChild(iEmpty);
-        span.appendChild(iFull);
+        article.appendChild(a);
+        a.appendChild(div1);
+        div1.appendChild(h2);
+        div1.appendChild(div2);
+        div2.appendChild(p)
+        div2.appendChild(iEmpty);
+        div2.appendChild(iFull);
+        
 
         //display image or video
         if (data.image !== undefined) {
             img.setAttribute("src", picture);
             img.setAttribute("class", "openModal");
-            article.appendChild(img);    
+            img.setAttribute("alt", title);
+            a.appendChild(img);    
         } if (data.video !== undefined) {
             vid.setAttribute("class", "video");
+            vid.setAttribute("title", title);
             src.setAttribute("src", videos);
-            article.appendChild(vid);
+            a.appendChild(vid);
             vid.appendChild(src);          
         }
 
         return (article);
     }
 
+    //like button
     function likeButton () {
-        let full = document.getElementsByClassName('full')[0];
-        let empty = document.getElementsByClassName('empty')[0];
-        let { likes } = medias;
     
-        empty.addEventListener('click', function (event) {
+        iEmpty.addEventListener('click', function (event) {
             event.stopPropagation();
-            empty.display.style = "none"
-            full.display.style = "block"
-            likes + 1
+            iEmpty.style.display = "none"
+            iFull.style.display = "block"
+            p.textContent = likes + 1;
     
         })
     
-        full.addEventListener('click', function (event) {
+        iFull.addEventListener('click', function (event) {
             event.stopPropagation();
-            empty.display.style = "block"
-            full.display.style = "none"
-            likes - 1
+            iEmpty.style.display = "block"
+            iFull.style.display = "none"
+            p.textContent = likes - 1;
     
         })
     }

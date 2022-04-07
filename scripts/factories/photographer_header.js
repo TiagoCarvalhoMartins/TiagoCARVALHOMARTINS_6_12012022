@@ -23,13 +23,6 @@ function headerFactory(data) {
         div.appendChild(p);
         return (article);
     }
-    async function displayHeader(photographer) {
-        const photographerHeader = document.querySelector(".photograph-header");
-        const headerModel = headerFactory(photographer);
-        const headerCardDOM = headerModel.getHeaderCardDOM();
-        photographerHeader.appendChild(headerCardDOM);
-        document.getElementsByClassName('header')[0].appendChild(document.getElementsByClassName('contact_button')[0] )
-    };
 
     return { name, picture, city, country, tagline, getHeaderCardDOM, displayHeader }
 }

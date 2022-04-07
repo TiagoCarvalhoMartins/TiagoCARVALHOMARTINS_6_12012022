@@ -45,6 +45,7 @@ function displayMedia(medias) {
         const mediaModel = mediaFactory(media);
         const mediaCardDOM = mediaModel.getMediaCardDOM(index);
         photographerMedia.appendChild(mediaCardDOM);
+        mediaModel.likeButton();
     });
 };
 
@@ -60,6 +61,7 @@ function createLightbox () {
     imgModel.addListener ();
 }
 
+//sort by
 let mediaSort = []
 let sortByDate = document.getElementById("date");
 let sortByPopularity = document.getElementById("popularity");
@@ -69,19 +71,7 @@ btnSort= document.getElementsByClassName('sort-btn')[0];
 const span = document.createElement( 'span' );
 span.setAttribute("class", "fas fa-chevron-down");
 
-//async function date() {
-//    const medias = await getMedias();
-//    mediaSort = medias
-//    mediaSort = medias.sort((a, b) => { 
-//        return new Date(a.date).valueOf() - new Date(b.date).valueOf();
-//    })
-//    hiddenSort.style.display = "none";
-//    btnSort.textContent = "Date";
-//    btnSort.appendChild(span);
-//    displayMedia (mediaSort);
-//    addIndex(mediaSort);
-//    addListener(medias);
-//}
+
 
 async function init() {
 
@@ -98,6 +88,7 @@ async function init() {
     displayHeader(photographer);
     createLightbox();
 
+    //sort by date
     sortByDate.addEventListener('click', function () {
         mediaSort = medias.sort((a, b) => { 
             return new Date(a.date).valueOf() - new Date(b.date).valueOf();
@@ -105,11 +96,11 @@ async function init() {
         hiddenSort.style.display = "none";
         btnSort.textContent = "Date";
         btnSort.appendChild(span);
-        displayMedia (mediaSort);
-        addIndex(mediaSort);
-        addListener(medias);
+        displayMedia (mediaSort);;
+        imgModel.addListener(medias);
     });
 
+    //sort by title
     sortByTitle.addEventListener('click', function () {
         mediaSort = medias.sort((a, b) => { 
             if (a.title.toLowerCase() < b.title.toLowerCase()) {
@@ -122,10 +113,10 @@ async function init() {
         btnSort.textContent = "Titre";
         btnSort.appendChild(span);
         displayMedia (mediaSort);
-        addIndex(mediaSort);
-        addListener(medias);
+        imgModel.addListener(medias);
     });
 
+    //sort by popularity
     sortByPopularity.addEventListener('click', function () {
         mediaSort = medias.sort((a, b) => {  
             return b.likes - a.likes
@@ -134,12 +125,11 @@ async function init() {
         btnSort.textContent = "Popularité";
         btnSort.appendChild(span);
         displayMedia (mediaSort);
-        addIndex(mediaSort);
-        addListener(medias);
+        imgModel.addListener(medias);
     });
 };
  
-
+//show or hide wrapper
 function wrapper() {
     if (document.getElementsByClassName('hidden')[0].style.display = "none") {
         document.getElementsByClassName('hidden')[0].style.display = "block"
