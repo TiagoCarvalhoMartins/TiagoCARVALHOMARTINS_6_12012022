@@ -7,6 +7,7 @@ function mediaFactory(data) {
     const iFull = document.createElement( 'i' );
     const iEmpty = document.createElement( 'i' );
     const p = document.createElement( 'p' );
+    let numberLikes = data.likes
 
     function getMediaCardDOM(index) {
         
@@ -34,9 +35,12 @@ function mediaFactory(data) {
         div1.setAttribute("class", "description");
         div2.setAttribute("class", "likes");
         iFull.setAttribute("class", "fa-solid fa-heart fa-stack-1x full");
+        iFull.setAttribute("title", "Bouton Like");
         iEmpty.setAttribute("class", "fa-regular fa-heart fa-stack-1x empty");
+        iEmpty.setAttribute("title", "Bouton Unlike");
         h2.textContent = title;
         h2.setAttribute("lang","en")
+        p.setAttribute("class", "likesCounter")
         p.textContent = likes;
 
         //append elements
@@ -70,19 +74,21 @@ function mediaFactory(data) {
     function likeButton () {
     
         iEmpty.addEventListener('click', function (event) {
+            event.preventDefault();
             event.stopPropagation();
             iEmpty.style.display = "none"
             iFull.style.display = "block"
-            p.textContent = likes + 1;
-    
+            numberLikes += 1
+            p.textContent = numberLikes;
         })
     
         iFull.addEventListener('click', function (event) {
+            event.preventDefault();
             event.stopPropagation();
             iEmpty.style.display = "block"
             iFull.style.display = "none"
-            p.textContent = likes - 1;
-    
+            numberLikes -= 1
+            p.textContent = numberLikes;
         })
     }
 

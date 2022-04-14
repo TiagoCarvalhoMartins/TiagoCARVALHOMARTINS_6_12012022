@@ -9,27 +9,36 @@ function modalFactory() {
 
     //create empty lightbox
     function getLightboxModal() {
+
+        //properties
         const div = document.createElement( 'div' );
         const divNav = document.createElement( 'div' );
         const divNavClose = document.createElement( 'div' );
         const button1 = document.createElement( 'button' );
         const button2 = document.createElement( 'button' );
         const button3 = document.createElement( 'button' );
+
+        //configure elements
         div.setAttribute("class", "lightboxModal");
         div.setAttribute("role", "dialog");
         div.setAttribute("aria-describedby", "lightbox");
         divNavClose.setAttribute("class", "nav-close")
         divNav.setAttribute("class", "imageNavigation");
         button1.setAttribute("class", "fas fa-chevron-left");
-        button1.setAttribute("aria-label", "Précédent");
+        button1.setAttribute("title", "Bouton Précédent");
+        button1.setAttribute("tabindex", "2");
         button2.setAttribute("class", "fas fa-chevron-right");
-        button2.setAttribute("aria-label", "Suivant");
+        button2.setAttribute("title", "Bouton Suivant");
+        button2.setAttribute("tabindex", "3");
         button3.setAttribute("class", "fa-solid fa-xmark");
-        button3.setAttribute("aria-label", "Fermer");
+        button3.setAttribute("title", "Bouton Fermer");
+        button3.setAttribute("tabindex", "1");
         img.setAttribute("class", "currentPicture");
         vid.setAttribute("class", "currentVideo");
-        vid.setAttribute("controls", "true")
+        vid.setAttribute("controls", "true");
+        h2.setAttribute("lang","en")
 
+        //append elements
         div.appendChild(divNavClose);
         div.appendChild(h2);
         divNavClose.appendChild(divNav)
@@ -68,6 +77,7 @@ function modalFactory() {
         const media = mediaSort.find (media => media.id == mediaID )
         _displayLightbox ();
         _updateLightboxModal(media, mediaIndex);
+        document.querySelector('.fa-xmark').autofocus = true;
     }
 
     //show lightbox

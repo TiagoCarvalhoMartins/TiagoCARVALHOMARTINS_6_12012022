@@ -18,11 +18,20 @@ a:focus {
 	border-radius: 5px;
 }
 
+a:hover {
+	outline: solid #901c1c 3px;
+	border-radius: 5px;
+}
+
 .header {
 	display: flex;
 	justify-content: space-around;
 	padding-top: 50px;
 	padding-bottom: 50px;
+}
+
+header .logoLink:hover {
+	outline: none;
 }
 
 .header .photograph-description {
@@ -48,6 +57,11 @@ a:focus {
 .header button {
 	order: 2;
 	margin: 50px;
+}
+
+.header button:hover {
+	outline: solid black 3px;
+	border-radius: 5px;
 }
 
 .header img {
@@ -155,6 +169,11 @@ h1 {
 	font-size: 15px;
 }
 
+.wrapper button:hover {
+	outline: solid black 3px;
+	border-radius: 5px;
+}
+
 .fa-chevron-down {
 	padding-left: 10px;
 }
@@ -177,6 +196,11 @@ h1 {
 	border-bottom: 1px solid white;
 	border-radius: 0px;
 	width: 125px;
+}
+
+.hidden button:hover {
+	outline: solid white 3px;
+	border-radius: 5px;
 }
 
 .fa-chevron-up {
@@ -262,6 +286,30 @@ h1 {
 	color: #901c1c;
 }
 
+footer {
+	position: fixed;
+	right: 5rem;
+    bottom: 0rem;
+	background-color: #DB8876;
+	font-weight: bold;
+	padding: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+	width: 18rem;
+}
+
+footer .staticFooter {
+	display: flex;
+	justify-content: space-between;
+}
+
+footer .staticFooter .numberLikes {
+	display: flex;
+	align-items: center;
+}
+
 /* lightbox */
 
 .lightboxModal {
@@ -281,6 +329,16 @@ h1 {
 .lightboxModal button {
 	border: none;
 	background-color: white;
+}
+
+.lightboxModal button:hover {
+	outline: solid #901c1c 3px;
+	border-radius: 5px;
+}
+
+.lightboxModal button:focus {
+	outline: solid #901c1c 3px;
+	border-radius: 5px;
 }
 
 .lightboxModal h2 {

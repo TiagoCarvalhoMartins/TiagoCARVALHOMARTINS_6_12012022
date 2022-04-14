@@ -49,13 +49,20 @@ function displayMedia(medias) {
     });
 };
 
+//create static footer
+function createFooter(photographer) {
+    const footer = document.querySelector("footer")
+    const footerModel = footerFactory(photographer)
+    footer.appendChild(footerModel)
+}
+
 
 //lightbox 
 const imgModel = modalFactory()
 
 function createLightbox () {
 
-    const imgModal = document.getElementById("main");
+    const imgModal = document.querySelector("aside");
     const imgNav = imgModel.getLightboxModal();
     imgModal.appendChild(imgNav);
     imgModel.addListener ();
@@ -63,6 +70,7 @@ function createLightbox () {
 
 //sort by
 let mediaSort = []
+let contactButton = document.getElementsByClassName("contact_button");
 let sortByDate = document.getElementById("date");
 let sortByPopularity = document.getElementById("popularity");
 let sortByTitle = document.getElementById("title");
@@ -87,6 +95,8 @@ async function init() {
     displayMedia(medias);
     displayHeader(photographer);
     createLightbox();
+    createFooter(photographer);
+    displayContactModal(photographer);
 
     //sort by date
     sortByDate.addEventListener('click', function () {

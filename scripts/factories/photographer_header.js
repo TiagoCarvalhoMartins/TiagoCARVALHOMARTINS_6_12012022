@@ -4,18 +4,24 @@ function headerFactory(data) {
     const picture = `assets/photographers/photographersID/${portrait}`;
 
     function getHeaderCardDOM() {
+
+        ////create elements
         const article = document.createElement( 'article' );
-        article.setAttribute("class", "header");
         const div = document.createElement( 'div' );
-        div.setAttribute("class", "photograph-description");
         const img = document.createElement( 'img' );
-        img.setAttribute("src", picture);
         const h1 = document.createElement( 'h1' );
-        h1.textContent = name;
         const h2 = document.createElement ( 'h2' );
-        h2.textContent = city + ", " + country;
         const p = document.createElement ( 'p' );
+
+        //configure elements
+        article.setAttribute("class", "header");
+        div.setAttribute("class", "photograph-description");
+        img.setAttribute("src", picture);
+        h1.textContent = name;
+        h2.textContent = city + ", " + country;
         p.textContent = tagline;
+
+        //append elements
         article.appendChild(img);
         article.appendChild(div);
         div.appendChild(h1);
