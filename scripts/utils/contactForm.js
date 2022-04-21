@@ -1,9 +1,10 @@
 function displayContactModal(data) {
     const { name } = data;
     const modal = document.getElementById("contact_modal");
-    let contactButton = document.getElementsByClassName("contact_button");
+    let contactButton = document.getElementsByClassName("contact_button")[0];
     const h2 = document.querySelector( 'h2' );
     form = document.querySelector("form");
+    h2.textContent = "Contactez-moi " + name
 
 
     function addListener() {
@@ -11,7 +12,6 @@ function displayContactModal(data) {
     }
 
     function _displayContactModal() {
-        h2.textContent = "Contactez-moi" + name
 	    modal.style.display = "block";
     }
 

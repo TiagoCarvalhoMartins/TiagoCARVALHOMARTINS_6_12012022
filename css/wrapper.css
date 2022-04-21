@@ -1,0 +1,58 @@
+.wrapper {
+	display: flex;
+	margin: 20px 0 0 100px;
+}
+
+.wrapper .sortby {
+	font-weight: bold;
+	margin-right: 20px;
+}
+.wrapper button {
+	background-color: #901c1c;
+	border: none;
+	color: white;
+	margin:1px 0;
+	padding: 10px;
+	border-radius: 5px;
+	position: relative;
+	width: 135px;
+	font-size: 15px;
+}
+
+.wrapper button:hover {
+	outline: solid black 3px;
+	border-radius: 5px;
+}
+
+.fa-chevron-down {
+	padding-left: 10px;
+}
+
+.hidden {
+	display: none;
+	position: absolute;
+	left: 181px;
+	bottom: 395px;
+	background-color: #901c1c;
+	color: white;
+	width: 125px;
+	padding: 10px;
+	border-radius: 5px;
+	font-size: 15px;
+}
+
+.hidden button {
+	padding: 10px;
+	border-bottom: 1px solid white;
+	border-radius: 0px;
+	width: 125px;
+}
+
+.hidden button:hover {
+	outline: solid white 3px;
+	border-radius: 5px;
+}
+
+.fa-chevron-up {
+	padding-left: 10px;
+}

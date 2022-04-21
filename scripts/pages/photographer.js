@@ -68,6 +68,11 @@ function createLightbox () {
     imgModel.addListener ();
 }
 
+function openContactModal (photographer) {
+    const contactModalModel = displayContactModal(photographer);
+    contactModalModel.addListener();
+}
+
 //sort by
 let mediaSort = []
 let contactButton = document.getElementsByClassName("contact_button");
@@ -96,7 +101,8 @@ async function init() {
     displayHeader(photographer);
     createLightbox();
     createFooter(photographer);
-    displayContactModal(photographer);
+    displayContactModal(photographers)
+    openContactModal(photographer)
 
     //sort by date
     sortByDate.addEventListener('click', function () {

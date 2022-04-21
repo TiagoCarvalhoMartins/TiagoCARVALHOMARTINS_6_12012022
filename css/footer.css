@@ -1,0 +1,23 @@
+footer {
+	position: fixed;
+	right: 5rem;
+    bottom: 0rem;
+	background-color: #DB8876;
+	font-weight: bold;
+	padding: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+	width: 18rem;
+}
+
+footer .staticFooter {
+	display: flex;
+	justify-content: space-between;
+}
+
+footer .staticFooter .numberLikes {
+	display: flex;
+	align-items: center;
+}

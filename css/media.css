@@ -1,0 +1,78 @@
+.media {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 70px;
+	margin-top: 100px;
+	margin-left: 100px;
+}
+
+.media article img {
+	object-fit: cover;
+	border-radius: 10px;
+	height: 300px;
+	width: 300px;
+	box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.78);
+}
+
+.media article video {
+	object-fit: cover;
+	border-radius: 10px;
+	height: 300px;
+	width: 300px;
+	box-shadow: 1px 1px 7px 0px rgba(0, 0, 0, 0.78);
+}
+
+.media a {
+	display: flex;
+	flex-direction: column-reverse;
+	max-width: 300px;
+	text-decoration: none;
+}
+
+.media article .description {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.media article .description h2 {
+	color: #901c1c;
+	font-size: 22px;
+	text-align: left;
+	margin: 0px 0;
+}
+
+.media article .likes {
+	display: flex
+}
+
+.media article .likes p {
+	color: #901c1c;
+	font-weight: bold;
+	font-size: 22px;
+	text-align: right;
+	margin: -0px 0;
+}
+
+.fa-stack {
+	height: 1em;
+	line-height: 1em;
+}
+
+.media article .likes .fa-stack-1x {
+	position: static;
+	font-size: 22px;
+	margin-top: 4px;
+	margin-left: 5px;
+}
+
+
+.media article .likes .empty {
+	display: block;
+	color: #901c1c;
+}
+
+.media article .likes .full {
+	display: none;
+	color: #901c1c;
+}

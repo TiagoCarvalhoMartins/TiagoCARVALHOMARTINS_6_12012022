@@ -1,5 +1,5 @@
 function footerFactory(data) {
-    const { price, likes } = data;
+    const { price } = data;
 
     //properties
     const mainDiv = document.createElement( 'div' );
@@ -8,7 +8,11 @@ function footerFactory(data) {
     const p1 = document.createElement( 'p' );
     const p2 = document.createElement( 'p' );
     const iFull = document.createElement( 'i' );
-    const likesCounter = document.querySelectorAll('.likesCounter');
+    const likeEmpty = document.querySelectorAll(".empty");
+    const likeFull = document.querySelectorAll(".full");
+    let totalLikes = mediaSort.reduce(function(totalLikes, current) {
+        return totalLikes + current.likes;
+      }, 0);
 
     //configure elements
     mainDiv.setAttribute("class", "staticFooter")
@@ -17,7 +21,7 @@ function footerFactory(data) {
     iFull.setAttribute("class", "fa-solid fa-heart fullBlack");
     iFull.setAttribute("title", "Like");
     p1.setAttribute("id", "totalLikes");
-    p1.textContent = likesCounter;
+    p1.textContent = totalLikes;
     p2.textContent = price + "€ / jour"
 
     //append elements
@@ -26,6 +30,21 @@ function footerFactory(data) {
     div1.appendChild(p1)
     div1.appendChild(iFull)
     div2.appendChild(p2)
+
+    //update like meter listener
+    function _addLikes() {
+      totalLikes += 1
+      p1.textContent = totalLikes;
+    }
+
+    function _deductLikes() {
+      totalLikes -= 1
+      p1.textContent = totalLikes;
+    }
+
+    likeEmpty.forEach((likeButton) =>likeButton.addEventListener('click', _addLikes))
+    likeFull.forEach((likeButton) =>likeButton.addEventListener('click', _deductLikes))
+
 
     return(mainDiv)
 }

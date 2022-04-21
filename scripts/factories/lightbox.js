@@ -17,6 +17,9 @@ function modalFactory() {
         const button1 = document.createElement( 'button' );
         const button2 = document.createElement( 'button' );
         const button3 = document.createElement( 'button' );
+        const span1 = document.createElement ('span');
+        const span2 = document.createElement ('span');
+        const span3 = document.createElement ('span');
 
         //configure elements
         div.setAttribute("class", "lightboxModal");
@@ -24,14 +27,14 @@ function modalFactory() {
         div.setAttribute("aria-describedby", "lightbox");
         divNavClose.setAttribute("class", "nav-close")
         divNav.setAttribute("class", "imageNavigation");
-        button1.setAttribute("class", "fas fa-chevron-left");
-        button1.setAttribute("title", "Bouton Précédent");
+        span1.setAttribute("class", "fas fa-chevron-left");
+        span1.setAttribute("title", "Bouton Précédent");
         button1.setAttribute("tabindex", "2");
-        button2.setAttribute("class", "fas fa-chevron-right");
-        button2.setAttribute("title", "Bouton Suivant");
+        span2.setAttribute("class", "fas fa-chevron-right");
+        span2.setAttribute("title", "Bouton Suivant");
         button2.setAttribute("tabindex", "3");
-        button3.setAttribute("class", "fa-solid fa-xmark");
-        button3.setAttribute("title", "Bouton Fermer");
+        span3.setAttribute("class", "fas fa-solid fa-xmark");
+        span3.setAttribute("title", "Bouton Fermer");
         button3.setAttribute("tabindex", "1");
         img.setAttribute("class", "currentPicture");
         vid.setAttribute("class", "currentVideo");
@@ -43,6 +46,9 @@ function modalFactory() {
         div.appendChild(h2);
         divNavClose.appendChild(divNav)
         divNavClose.appendChild(button3);
+        button1.appendChild(span1)
+        button2.appendChild(span2)
+        button3.appendChild(span3)
         divNav.appendChild(button1);
         divNav.appendChild(img);
         divNav.appendChild(vid);
@@ -69,7 +75,7 @@ function modalFactory() {
         next.addEventListener('click', _displayNext)  
     }
 
-    //get current article and display lightbox
+    //get current article, display lightbox, and hide main
     function _onclickOnArticle(event) {
         let currentImgTarget = event.currentTarget;
         let mediaID = currentImgTarget.dataset.id;
@@ -77,16 +83,13 @@ function modalFactory() {
         const media = mediaSort.find (media => media.id == mediaID )
         _displayLightbox ();
         _updateLightboxModal(media, mediaIndex);
-        document.querySelector('.fa-xmark').autofocus = true;
+        document.getElementById('main').style.display = "none"
+        
     }
 
     //show lightbox
     function _displayLightbox() {
         document.getElementsByClassName('lightboxModal')[0].style.display = "flex";
-        document.getElementsByClassName('photograph-header')[0].setAttribute("aria-hidden", "true")
-        document.getElementsByClassName('wrapper')[0].setAttribute("aria-hidden", "true")
-        document.getElementsByClassName('media')[0].setAttribute("aria-hidden", "true")
-        document.getElementsByClassName('articleMedia')[0].setAttribute("aria-hidden", "true")
     }
 
     //display image
@@ -136,15 +139,16 @@ function modalFactory() {
         _updateLightboxModal (media, newIndex)
     }
 
+    window.onkeyup = function (event) {
+     if (event.keyCode == 27) {
+        _closeLightbox();
+     }
+    }
 
-
-    //close the lightbox
+    //close the lightbox and show main
     function _closeLightbox() {
         document.getElementsByClassName('lightboxModal')[0].style.display = "none";
-        document.getElementsByClassName('photograph-header')[0].setAttribute("aria-hidden", "false")
-        document.getElementsByClassName('wrapper')[0].setAttribute("aria-hidden", "false")
-        document.getElementsByClassName('media')[0].setAttribute("aria-hidden", "false")
-        document.getElementsByClassName('articleMedia')[0].setAttribute("aria-hidden", "false")
+        document.getElementById('main').style.display = "block"
     };
 
     
