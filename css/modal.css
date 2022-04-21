@@ -62,10 +62,23 @@ form input {
 	
 }
 
-form .message {
+form #message {
 	width: 100%;
 	font-size: 20px;
 	border: none;
 	border-radius: 5px;
 	height: 10rem;
+}
+
+.submit_button {
+	font-size: 20px;
+	font-weight: bold;
+	color: white;
+	padding: 11px;
+	width: 170px;
+	height: 70px;
+	border: none;
+	background-color: #901c1c;
+	border-radius: 5px;
+	cursor: pointer;
 }

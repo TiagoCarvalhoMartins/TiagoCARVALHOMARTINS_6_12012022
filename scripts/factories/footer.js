@@ -32,6 +32,9 @@ function footerFactory(data) {
     div2.appendChild(p2)
 
     //update like meter listener
+    likeEmpty.forEach((likeButton) =>likeButton.addEventListener('click', _addLikes))
+    likeFull.forEach((likeButton) =>likeButton.addEventListener('click', _deductLikes))
+
     function _addLikes() {
       totalLikes += 1
       p1.textContent = totalLikes;
@@ -41,10 +44,6 @@ function footerFactory(data) {
       totalLikes -= 1
       p1.textContent = totalLikes;
     }
-
-    likeEmpty.forEach((likeButton) =>likeButton.addEventListener('click', _addLikes))
-    likeFull.forEach((likeButton) =>likeButton.addEventListener('click', _deductLikes))
-
-
+  
     return(mainDiv)
 }

@@ -101,7 +101,7 @@ async function init() {
     displayHeader(photographer);
     createLightbox();
     createFooter(photographer);
-    displayContactModal(photographers)
+    displayContactModal(photographer)
     openContactModal(photographer)
 
     //sort by date

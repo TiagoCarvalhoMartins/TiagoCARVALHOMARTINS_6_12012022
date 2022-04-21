@@ -23,9 +23,9 @@
         <p class="sortby">Trier par</p>
         <button class="sort-btn" onclick="wrapper()">Popularité <span class="fas fa-chevron-down"></span></button>
         <div class="hidden">
-          <button id="popularity">Popularité<span class="fas fa-chevron-up"></span></a>
-          <button id="date">Date</a>
-          <button id="title">Titre</a>
+          <button id="popularity">Popularité<span class="fas fa-chevron-up"></span></button>
+          <button id="date">Date</button>
+          <button id="title">Titre</button>
         </div>
       </div>
       <div class="media">
@@ -39,26 +39,26 @@
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" onclick="closeModal()" alt="bouton fermer"/>
         </header>
 				<form>
 					<div>
 						<label>Prénom</label>
-						<input type="text" required="required"/>
+						<input id ="first" type="text" required="required"/>
 					</div>
           <div>
             <label>Nom</label>
-            <input type="text" required="required"/>
+            <input id ="last" type="text" required="required"/>
           </div>
           <div>
             <label>Email</label>
-            <input type="email" required="required"/>
+            <input id ="email" type="email" required="required"/>
           </div>
           <div>
             <label>Votre Message</label>
-            <textarea class="message"  required="required"></textarea>
+            <textarea id ="message" required="required"></textarea>
           </div>
-          <button class="contact_button" onclick="closeModal()">Envoyer</button>
+          <button class="submit_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
@@ -68,6 +68,7 @@
     <script src="scripts/factories/photographer_header.js"></script>
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/contactFormValue.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/factories/footer.js"></script>
   </body>

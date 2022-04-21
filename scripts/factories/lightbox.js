@@ -139,6 +139,7 @@ function modalFactory() {
         _updateLightboxModal (media, newIndex)
     }
 
+    //close lightbox with escape button
     window.onkeyup = function (event) {
      if (event.keyCode == 27) {
         _closeLightbox();
