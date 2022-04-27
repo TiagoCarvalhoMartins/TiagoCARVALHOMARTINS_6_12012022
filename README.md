@@ -1,6 +1,6 @@
-# Base de code du projet P6 - Parcours Front-end
+# Projet 6 Openclassrooms - FishEye
 
-## Démarrer le projet
+## Lien vers pages
 
-Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.
+https://tiagocarvalhomartins.github.io/TiagoCARVALHOMARTINS_6_12012022/
 
