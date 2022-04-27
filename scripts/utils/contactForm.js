@@ -5,13 +5,24 @@ function displayContactModal(data) {
     const h2 = document.querySelector( '#contact_modal h2' );
     form = document.querySelector("form");
     h2.textContent = "Contactez-moi " + name
+    const closeModal = document.getElementsByClassName("closeModal")[0]
 
     function addListener() {
         contactButton.addEventListener("click", _displayContactModal)
+        closeModal.addEventListener("click", _closeModal)
+        
     }
-
+    
+    window.onkeyup = function (event) {
+        if (event.keyCode == 27) {
+           _closeModal();
+        }
+    }
     function _displayContactModal() {
 	    modal.style.display = "block";
+    }
+    function _closeModal() {
+	    modal.style.display = "none";
     }
 
     return { addListener }
@@ -44,4 +55,5 @@ submitBtn.addEventListener('click', function(event) {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 })
+
 
