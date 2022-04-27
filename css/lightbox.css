@@ -38,11 +38,10 @@
 	max-height: 75%;
 }
 
-.nav-close .fa-solid {
+.close {
 	color: #901c1c;
 	position: relative;
-	left: 1570px;
-	bottom: 710px;
+	bottom: 350px;
 	font-size: 60px;
 	z-index: 3;
 }

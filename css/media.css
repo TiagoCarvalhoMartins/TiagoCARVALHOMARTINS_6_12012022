@@ -59,6 +59,17 @@
 	line-height: 1em;
 }
 
+.heart {
+	border: none;
+	background-color: white;
+}
+
+.heart:focus {
+	outline: solid #901c1c 3px;
+	background-color: white;
+	border-radius: 5px;
+}
+
 .media article .likes .fa-stack-1x {
 	position: static;
 	font-size: 22px;
