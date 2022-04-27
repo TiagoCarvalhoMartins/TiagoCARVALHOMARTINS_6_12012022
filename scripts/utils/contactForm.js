@@ -13,11 +13,6 @@ function displayContactModal(data) {
         
     }
     
-    window.onkeyup = function (event) {
-        if (event.keyCode == 27) {
-           _closeModal();
-        }
-    }
     function _displayContactModal() {
 	    modal.style.display = "block";
     }
