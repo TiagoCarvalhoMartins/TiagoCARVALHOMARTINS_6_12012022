@@ -14,6 +14,7 @@ function modalFactory() {
         const div = document.createElement( 'div' );
         const divNav = document.createElement( 'div' );
         const divNavClose = document.createElement( 'div' );
+        const divNavNextClose = document.createElement( 'div' );
         const button1 = document.createElement( 'button' );
         const button2 = document.createElement( 'button' );
         const button3 = document.createElement( 'button' );
@@ -25,17 +26,19 @@ function modalFactory() {
         div.setAttribute("class", "lightboxModal");
         div.setAttribute("role", "dialog");
         div.setAttribute("aria-describedby", "lightbox");
+        divNavNextClose.setAttribute("class", "NextClose")
         divNavClose.setAttribute("class", "nav-close")
         divNav.setAttribute("class", "imageNavigation");
         span1.setAttribute("class", "fas fa-chevron-left");
         span1.setAttribute("title", "Bouton Précédent");
-        button1.setAttribute("tabindex", "2");
+        button1.setAttribute("tabindex", "0");
         span2.setAttribute("class", "fas fa-chevron-right");
         span2.setAttribute("title", "Bouton Suivant");
-        button2.setAttribute("tabindex", "3");
+        button2.setAttribute("tabindex", "0");
         span3.setAttribute("class", "fas fa-solid fa-xmark");
         span3.setAttribute("title", "Bouton Fermer");
-        button3.setAttribute("tabindex", "1");
+        button3.setAttribute("tabindex", "0");
+        button3.setAttribute("class", "close");
         img.setAttribute("class", "currentPicture");
         vid.setAttribute("class", "currentVideo");
         vid.setAttribute("controls", "true");
@@ -47,12 +50,14 @@ function modalFactory() {
         divNavClose.appendChild(divNav)
         divNavClose.appendChild(button3);
         button1.appendChild(span1)
+        divNavNextClose.appendChild(button2)
+        divNavNextClose.appendChild(button3)
         button2.appendChild(span2)
         button3.appendChild(span3)
         divNav.appendChild(button1);
         divNav.appendChild(img);
         divNav.appendChild(vid);
-        divNav.appendChild(button2);
+        divNav.appendChild(divNavNextClose);
         return (div);
     }
 
@@ -139,10 +144,16 @@ function modalFactory() {
         _updateLightboxModal (media, newIndex)
     }
 
-    //close lightbox with escape button
+    //keyboard navigation
     window.onkeyup = function (event) {
      if (event.keyCode == 27) {
         _closeLightbox();
+     }
+     if (event.keyCode == 39) {
+        _displayNext();
+     }
+     if (event.keyCode == 37) {
+        _displayPrevious();
      }
     }
 

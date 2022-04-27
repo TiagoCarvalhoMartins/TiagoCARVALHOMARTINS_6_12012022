@@ -4,8 +4,8 @@ function mediaFactory(data) {
     const picture = `assets/photographers/${photographerId}/${image}`;
     const videos = `assets/photographers/${photographerId}/${video}`;
 
-    const iFull = document.createElement( 'i' );
-    const iEmpty = document.createElement( 'i' );
+    const iFull = document.createElement( 'button' );
+    const iEmpty = document.createElement( 'button' );
     const p = document.createElement( 'p' );
     let numberLikes = data.likes
 
@@ -34,9 +34,9 @@ function mediaFactory(data) {
         article.setAttribute("data-index", index);
         div1.setAttribute("class", "description");
         div2.setAttribute("class", "likes");
-        iFull.setAttribute("class", "fa-solid fa-heart fa-stack-1x full");
+        iFull.setAttribute("class", "fa-solid fa-heart fa-stack-1x full heart");
         iFull.setAttribute("title", "Bouton Like");
-        iEmpty.setAttribute("class", "fa-regular fa-heart fa-stack-1x empty");
+        iEmpty.setAttribute("class", "fa-regular fa-heart fa-stack-1x empty heart");
         iEmpty.setAttribute("title", "Bouton Unlike");
         h2.textContent = title;
         h2.setAttribute("lang","en")
