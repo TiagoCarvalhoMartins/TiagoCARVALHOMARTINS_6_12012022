@@ -5,13 +5,18 @@ function displayContactModal(data) {
     const h2 = document.querySelector( '#contact_modal h2' );
     form = document.querySelector("form");
     h2.textContent = "Contactez-moi " + name
+    const closeModal = document.getElementsByClassName("closeModal")[0]
 
     function addListener() {
         contactButton.addEventListener("click", _displayContactModal)
+        closeModal.addEventListener("click", _closeModal)
     }
 
     function _displayContactModal() {
 	    modal.style.display = "block";
+    }
+    function _closeModal() {
+	    modal.style.display = "none";
     }
 
     return { addListener }
