@@ -10,8 +10,14 @@ function displayContactModal(data) {
     function addListener() {
         contactButton.addEventListener("click", _displayContactModal)
         closeModal.addEventListener("click", _closeModal)
+        
     }
-
+    
+    window.onkeyup = function (event) {
+        if (event.keyCode == 27) {
+           _closeModal();
+        }
+    }
     function _displayContactModal() {
 	    modal.style.display = "block";
     }
@@ -49,4 +55,5 @@ submitBtn.addEventListener('click', function(event) {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 })
+
 
