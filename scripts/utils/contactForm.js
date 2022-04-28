@@ -10,7 +10,6 @@ function displayContactModal(data) {
     function addListener() {
         contactButton.addEventListener("click", _displayContactModal)
         closeModal.addEventListener("click", _closeModal)
-        
     }
     
     function _displayContactModal() {

@@ -50,10 +50,13 @@ function displayMedia(medias) {
 };
 
 //create static footer
+let footerModel ;
+
 function createFooter(photographer) {
     const footer = document.querySelector("footer")
-    const footerModel = footerFactory(photographer)
-    footer.appendChild(footerModel)
+    footerModel = footerFactory(photographer)
+    footer.appendChild(footerModel.mainDiv)
+    footerModel.addListener();
 }
 
 
@@ -95,6 +98,7 @@ async function init() {
     // Récupère les datas des photographes
     const medias = await getMedias();
     mediaSort = medias
+    
 
     //display
     displayMedia(medias);
@@ -114,6 +118,7 @@ async function init() {
         btnSort.appendChild(span);
         displayMedia (mediaSort);;
         imgModel.addListener(medias);
+        footerModel.addListener();
     });
 
     //sort by title
@@ -130,6 +135,7 @@ async function init() {
         btnSort.appendChild(span);
         displayMedia (mediaSort);
         imgModel.addListener(medias);
+        footerModel.addListener();
     });
 
     //sort by popularity
@@ -142,6 +148,7 @@ async function init() {
         btnSort.appendChild(span);
         displayMedia (mediaSort);
         imgModel.addListener(medias);
+        footerModel.addListener();
     });
 };
  
